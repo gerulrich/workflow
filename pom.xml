@@ -3,7 +3,7 @@
 
 	<groupId>org.simple.workflow</groupId>
 	<artifactId>workflow</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 
 	<name>workflow</name>
@@ -39,6 +39,20 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-source-plugin</artifactId>
+			    <version>2.2.1</version>
+			    <executions>
+			        <execution>
+			            <id>attach-sources</id>
+			            <goals>
+			                <goal>jar</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>			
 
 			<plugin>
 				<groupId>com.atlassian.maven.plugins</groupId>
