@@ -13,6 +13,11 @@ import org.simple.workflow.entity.DistributionGroup;
 import org.simple.workflow.entity.Step;
 import org.simple.workflow.entity.WorkflowProcess;
 
+/**
+ * @see {@link WorkflowProcess}
+ * @author German Ulrich
+ *
+ */
 public class WorkflowProcessImpl
     implements WorkflowProcess {
 

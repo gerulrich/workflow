@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.simple.workflow.entity.Transition;
 
+/**
+ * @see {@link Transition}
+ * @author German Ulrich
+ *
+ */
 public class TransitionImpl
     implements Transition {
 

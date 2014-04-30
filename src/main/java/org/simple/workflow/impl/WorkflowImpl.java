@@ -9,6 +9,11 @@ import org.simple.workflow.entity.Node;
 import org.simple.workflow.entity.Transition;
 import org.simple.workflow.entity.Workflow;
 
+/**
+ * @see {@link Workflow}
+ * @author German Ulrich
+ *
+ */
 public class WorkflowImpl
     implements Workflow {
 

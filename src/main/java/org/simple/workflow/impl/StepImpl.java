@@ -4,6 +4,11 @@ import java.util.Date;
 
 import org.simple.workflow.entity.Step;
 
+/**
+ * @see {@link Step}
+ * @author German Ulrich
+ *
+ */
 public class StepImpl
     implements Step {
 
