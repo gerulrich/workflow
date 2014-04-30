@@ -33,4 +33,10 @@ public interface Step {
      * @return
      */
     String getAgentName();
+    
+    /**
+     * Retorna el identificador del agente que cre&oacute; el step.
+     * @return
+     */
+    String getAgentOID();
 }

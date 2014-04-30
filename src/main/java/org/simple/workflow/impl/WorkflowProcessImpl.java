@@ -56,12 +56,12 @@ public class WorkflowProcessImpl
 
     @Override
     public void addStep(String name, String description, Agent agent, Date date) {
-        this.addStep(this.createStep(name, description, agent.getName(), date), agent.getDG());
+        this.addStep(this.createStep(name, description, agent.getOID(), agent.getName(), date), agent.getDG());
     }
 
     @Override
     public void addStep(String name, String description, Agent agent, DistributionGroup dg, Date date) {
-        this.addStep(this.createStep(name, description, agent.getName(), date), dg);
+        this.addStep(this.createStep(name, description, agent.getOID(), agent.getName(), date), dg);
     }
 
     @Override
@@ -82,8 +82,8 @@ public class WorkflowProcessImpl
         this.currentStep.put(dg.getOID(), step);
     }
 
-    protected Step createStep(String name, String description, String agentName, Date date) {
-        return new StepImpl(name, description, agentName, date);
+    protected Step createStep(String name, String description, String agentOID, String agentName, Date date) {
+        return new StepImpl(name, description, agentOID, agentName, date);
     }
 
 }

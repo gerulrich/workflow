@@ -63,6 +63,7 @@ public class WorkflowEngineImplTest {
         Assert.assertEquals("OPEN", currentStep.getName());
         Assert.assertEquals("Abierto", currentStep.getDescription());
         Assert.assertEquals(this.agentA.getName(), currentStep.getAgentName());
+        Assert.assertEquals(this.agentA.getOID(), currentStep.getAgentOID());
 
         verify(workable, times(1)).getKey();
         verify(workable, times(1)).addStep(eq(this.agentA), eq(this.agentA.getDG()), eq("OPEN"), eq("Abierto"),
@@ -130,6 +131,7 @@ public class WorkflowEngineImplTest {
         Assert.assertNotNull(currentStep);
         Assert.assertEquals("CLOSED", currentStep.getName());
         Assert.assertEquals(this.agentSUP.getName(), currentStep.getAgentName());
+        Assert.assertEquals(this.agentSUP.getOID(), currentStep.getAgentOID());
 
         verify(workable, times(1)).getKey();
         verify(workable, times(1)).addStep(eq(this.agentSUP), eq(this.agentSUP.getDG()), eq("CLOSED"), anyString(),
@@ -155,11 +157,13 @@ public class WorkflowEngineImplTest {
         Assert.assertNotNull(currentStepA);
         Assert.assertEquals("DISPATCHED", currentStepA.getName());
         Assert.assertEquals(this.agentA.getName(), currentStepA.getAgentName());
+        Assert.assertEquals(this.agentA.getOID(), currentStepA.getAgentOID());
 
         Step currentStepB = this.process.getCurrentStep(this.agentB.getDG());
         Assert.assertNotNull(currentStepB);
         Assert.assertEquals("IN_PROGRESS", currentStepB.getName());
         Assert.assertEquals(this.agentA.getName(), currentStepB.getAgentName());
+        Assert.assertEquals(this.agentA.getOID(), currentStepB.getAgentOID());        
 
         verify(workable, times(1)).getKey();
         verify(workable, times(1)).addStep(eq(this.agentA), eq(this.agentA.getDG()), eq("DISPATCHED"), anyString(),

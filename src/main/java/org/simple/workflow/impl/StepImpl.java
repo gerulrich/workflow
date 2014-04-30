@@ -16,13 +16,15 @@ public class StepImpl
     private String description;
     private Date date;
     private String agentName;
+    private String agentOID;
 
-    public StepImpl(String name, String description, String agentName, Date date) {
+    public StepImpl(String name, String description, String agentOID, String agentName, Date date) {
         super();
         this.name = name;
         this.description = description;
-        this.date = date;
+        this.agentOID = agentOID;
         this.agentName = agentName;
+        this.date = date;
     }
 
     protected StepImpl() {
@@ -64,5 +66,14 @@ public class StepImpl
     public void setAgentName(String agentName) {
         this.agentName = agentName;
     }
+
+    @Override
+	public String getAgentOID() {
+		return agentOID;
+	}
+
+	protected void setAgentOID(String agentOID) {
+		this.agentOID = agentOID;
+	}
 
 }
