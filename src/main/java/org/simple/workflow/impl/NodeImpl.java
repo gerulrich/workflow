@@ -2,6 +2,11 @@ package org.simple.workflow.impl;
 
 import org.simple.workflow.entity.Node;
 
+/**
+ * @see {@link Node}
+ * @author German Ulrich
+ *
+ */
 public class NodeImpl
     implements Node {
 
