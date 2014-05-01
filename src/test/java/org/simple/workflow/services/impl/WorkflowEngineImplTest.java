@@ -252,6 +252,8 @@ public class WorkflowEngineImplTest {
     @Test
     public void test_getTransitions_InJoinNode_canProceed_shouldValidTransition() throws WorkflowOperationException {
         this.process.addStep("WAIT_CLOSED", "WAIT_CLOSED", this.agentA, new Date());
+        this.process.addStep("WAIT_CLOSED", "WAIT_CLOSED", this.agentB, new Date());
+        this.process.addStep("CLOSED", "CLOSED", this.agentB, new Date());
 
         Workable workable = MockUtils.createWorkable(this.process.getKey());
         List<Transition> transitions = this.engine.getTransitions(workable, this.agentA);

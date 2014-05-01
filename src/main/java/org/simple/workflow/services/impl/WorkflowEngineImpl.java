@@ -196,10 +196,16 @@ public class WorkflowEngineImpl
         Node currentNode = workflow.getByName(currentStep.getName());
         if (currentNode.isJoinNode()) {
             for (DistributionGroup dg : process.getDistributionGroups()) {
-                Step stepForDG = process.getCurrentStep(dg);
-                Node node = workflow.getByName(stepForDG.getName());
-                if (!node.isJoinNode() && !node.getName().equals(currentNode.getName())) {
-                    standby = true;
+                List<Step> stepsForDG = process.getSteps(dg);
+                boolean stepFound = false;
+                for(Step step : stepsForDG) {
+                	if (step.getName().equals(currentNode.getName())) {
+                		stepFound = true;
+                		break;
+                    }
+                }
+                if (!stepFound) {
+                	standby = true;
                 }
             }
         }
