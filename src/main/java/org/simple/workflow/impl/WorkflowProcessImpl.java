@@ -56,12 +56,12 @@ public class WorkflowProcessImpl
 
     @Override
     public void addStep(String name, String description, Agent agent, Date date) {
-        this.addStep(this.createStep(name, description, agent.getOID(), agent.getName(), date), agent.getDG());
+        this.addStep(this.createStep(name, description, agent.getOID(), agent.getName(), agent.getDG().getOID(), date), agent.getDG());
     }
 
     @Override
     public void addStep(String name, String description, Agent agent, DistributionGroup dg, Date date) {
-        this.addStep(this.createStep(name, description, agent.getOID(), agent.getName(), date), dg);
+        this.addStep(this.createStep(name, description, agent.getOID(), agent.getName(), dg.getOID(), date), dg);
     }
 
     @Override
@@ -73,8 +73,21 @@ public class WorkflowProcessImpl
     public boolean isValidDG(DistributionGroup dg) {
         return this.currentStep != null && this.currentStep.containsKey(dg.getOID());
     }
+    
+    @Override
+	public List<Step> getSteps(DistributionGroup dg) {
+    	List<Step> result = new ArrayList<Step>();
+    	if (isValidDG(dg)) {
+    		for(Step step : this.steps) {
+    			if (((StepImpl)step).getDgOID().equals(dg.getOID())) {
+    				result.add(step);
+    			}
+    		}
+    	}
+		return result;
+	}
 
-    private void addStep(Step step, DistributionGroup dg) {
+	private void addStep(Step step, DistributionGroup dg) {
         this.steps.add(step);
         if (!this.currentStep.containsKey(dg.getOID())) {
             this.distributionGroup.add(dg);
@@ -82,8 +95,8 @@ public class WorkflowProcessImpl
         this.currentStep.put(dg.getOID(), step);
     }
 
-    protected Step createStep(String name, String description, String agentOID, String agentName, Date date) {
-        return new StepImpl(name, description, agentOID, agentName, date);
+    private Step createStep(String name, String description, String agentOID, String agentName, String dgOID, Date date) {
+        return new StepImpl(name, description, agentOID, agentName, dgOID, date);
     }
 
 }

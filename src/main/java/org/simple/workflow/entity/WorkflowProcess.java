@@ -61,4 +61,11 @@ public interface WorkflowProcess {
      * @return
      */
     List<DistributionGroup> getDistributionGroups();
+    
+    /**
+     * Retorna todos los step de un {@link DistributionGroup}.
+     * @param dg
+     * @return
+     */
+    List<Step> getSteps(DistributionGroup dg);
 }
