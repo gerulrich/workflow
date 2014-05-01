@@ -19,7 +19,7 @@ public class TransitionImpl
     private String to;
     private String forkTo;
     private boolean forkTransition;
-    private List<String> requiredTransitions;
+    private List<String> requiredPermissions;
 
     public TransitionImpl(String name, String description, String from, String to, String forkTo, boolean forkTransition,
         List<String> requiredTransitions) {
@@ -30,7 +30,7 @@ public class TransitionImpl
         this.to = to;
         this.forkTo = forkTo;
         this.forkTransition = forkTransition;
-        this.requiredTransitions = requiredTransitions;
+        this.requiredPermissions = requiredTransitions;
     }
 
     protected TransitionImpl() {
@@ -69,7 +69,10 @@ public class TransitionImpl
 
     @Override
     public List<String> getRequiredPermissions() {
-        return new ArrayList<String>(this.requiredTransitions);
+    	if (this.requiredPermissions != null) {
+    		return new ArrayList<String>(this.requiredPermissions);
+    	} else {
+    		return new ArrayList<String>();
+    	}
     }
-
 }
