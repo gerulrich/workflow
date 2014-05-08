@@ -22,11 +22,11 @@ public class MockUtils {
     public static WorkflowDatasource createDatasource() {
 
         List<Node> nodes = new ArrayList<Node>();
-        nodes.add(new NodeImpl("OPEN", "Abierto", false));
-        nodes.add(new NodeImpl("DISPATCHED", "Despachado", false));
-        nodes.add(new NodeImpl("IN_PROGRESS", "En progreso", false));
-        nodes.add(new NodeImpl("WAIT_CLOSED", "Espera de cierre", true));
-        nodes.add(new NodeImpl("CLOSED", "Cerrado", false));
+        nodes.add(new NodeImpl("OPEN", "Abierto", false, false));
+        nodes.add(new NodeImpl("DISPATCHED", "Despachado", false, false));
+        nodes.add(new NodeImpl("IN_PROGRESS", "En progreso", false, false));
+        nodes.add(new NodeImpl("WAIT_CLOSED", "Espera de cierre", true, false));
+        nodes.add(new NodeImpl("CLOSED", "Cerrado", false, true));
 
         List<Transition> transitions = new ArrayList<Transition>();
         transitions.add(createTransition("DISPATCH", "Despachar", "OPEN", "DISPATCHED", "IN_PROGRESS"));

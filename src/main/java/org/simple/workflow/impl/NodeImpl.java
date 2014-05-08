@@ -13,12 +13,14 @@ public class NodeImpl
     private String name;
     private String description;
     private boolean joinNode;
+    private boolean endNode;
 
-    public NodeImpl(String name, String description, boolean joinNode) {
+    public NodeImpl(String name, String description, boolean joinNode, boolean endNode) {
         super();
         this.name = name;
         this.description = description;
         this.joinNode = joinNode;
+        this.endNode = endNode;
     }
 
     protected NodeImpl() {
@@ -51,4 +53,15 @@ public class NodeImpl
     protected void setJoinNode(boolean joinNode) {
         this.joinNode = joinNode;
     }
+
+    @Override
+	public boolean isEndNode() {
+		return endNode;
+	}
+
+	protected void setEndNode(boolean endNode) {
+		this.endNode = endNode;
+	}
+    
+    
 }

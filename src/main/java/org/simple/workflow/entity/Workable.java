@@ -24,5 +24,10 @@ public interface Workable {
      * @param date fecha
      */
     void addStep(Agent agent, DistributionGroup dg, String name, String description, Date date);
+    
+    /**
+     * Este m&eacute;todo es invocado cuando el proceso de workflow a llegado a su fin.
+     */
+    void completed();
 
 }

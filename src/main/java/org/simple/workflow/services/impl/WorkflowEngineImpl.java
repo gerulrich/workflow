@@ -171,10 +171,9 @@ public class WorkflowEngineImpl
             }
         }
 
-        // if (nextNode.isEnd()) {
-        // verificar si todos llegaron al final
-        // si es asi, se da por terminado el proceso.
-        // }
+        if (nextNode.isEndNode() && isCompleted(workflow, process)) {
+        	workable.completed();
+        }
 
         this.datasource.save(process);
 
@@ -210,6 +209,25 @@ public class WorkflowEngineImpl
             }
         }
         return standby;
+    }
+    
+    /**
+     * Verifica si elo proceso est&aacute; en un nodo de fin para todos los {@link DistributionGroup}.
+     * @param process
+     * @param agent
+     * @return
+     */
+    private boolean isCompleted(Workflow workflow, WorkflowProcess process) {
+    	boolean completed = true;
+    	for (DistributionGroup dg : process.getDistributionGroups()) {
+    		Step currentStep = process.getCurrentStep(dg);
+    		Node currentNode = workflow.getByName(currentStep.getName());
+    		if (!currentNode.isEndNode()) {
+    			completed = false;
+    			break;
+    		}
+    	}
+    	return completed;
     }
 
 }
