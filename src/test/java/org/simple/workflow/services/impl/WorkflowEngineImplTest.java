@@ -136,15 +136,14 @@ public class WorkflowEngineImplTest {
         verify(workable, times(1)).getKey();
         verify(workable, times(1)).addStep(eq(this.agentSUP), eq(this.agentSUP.getDG()), eq("CLOSED"), anyString(),
             any(Date.class));
+        verify(workable, times(1)).completed();
         verifyNoMoreInteractions(workable);
 
         verify(this.datasource, times(1)).getByKey(this.process.getKey());
         verify(this.datasource, times(1)).resolveWorkflow(WORKFLOW_VERSION);
         verify(this.datasource, times(1)).save(this.process);
         verifyNoMoreInteractions(this.datasource);
-
     }
-
 
     @Test
     public void test_fork_ValidTransition_shouldExecuteForkStep() throws WorkflowOperationException {
@@ -268,6 +267,29 @@ public class WorkflowEngineImplTest {
         verifyNoMoreInteractions(this.datasource);
 
     }
+    
+    @Test
+    public void test_execToEndNode_shouldCompleteProcess() throws WorkflowOperationException {
+        this.process.addStep("WAIT_CLOSED", "WAIT_CLOSED", this.agentA, new Date());
+        this.process.addStep("WAIT_CLOSED", "WAIT_CLOSED", this.agentB, new Date());
+        this.process.addStep("CLOSED", "CLOSED", this.agentB, new Date());
+
+        Workable workable = MockUtils.createWorkable(this.process.getKey());
+        this.engine.exec(workable, "CLOSE", this.agentA);
+        
+
+        verify(workable, times(1)).getKey();
+        verify(workable, times(1)).addStep(eq(this.agentA), eq(this.agentA.getDG()), eq("CLOSED"), anyString(),
+                any(Date.class));
+        verify(workable, times(1)).completed();        
+        verifyNoMoreInteractions(workable);
+
+        verify(this.datasource, times(1)).getByKey(this.process.getKey());
+        verify(this.datasource, times(1)).resolveWorkflow(WORKFLOW_VERSION);
+        verify(this.datasource, times(1)).save(eq(this.process));
+        verifyNoMoreInteractions(this.datasource);
+
+    }    
 
     private static String createWorkflowKey() {
         WorkflowEngineImplTest.WORKFLOW_KEY++;

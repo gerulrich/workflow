@@ -32,5 +32,7 @@ public interface Node {
      * @return
      */
     boolean isJoinNode();
+    
+    boolean isEndNode();
 
 }
