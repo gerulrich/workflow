@@ -269,6 +269,23 @@ public class WorkflowEngineImplTest {
     }
     
     @Test
+    public void test_getTransitions_notTransitions_shouldReturnEmptyList() throws WorkflowOperationException {
+        this.process.addStep("CLOSED", "CLOSED", this.agentA, new Date());
+
+        Workable workable = MockUtils.createWorkable(this.process.getKey());
+        List<Transition> transitions = this.engine.getTransitions(workable, this.agentA);
+        Assert.assertTrue(transitions.isEmpty());
+
+        verify(workable, times(1)).getKey();
+        verifyNoMoreInteractions(workable);
+
+        verify(this.datasource, times(1)).getByKey(this.process.getKey());
+        verify(this.datasource, times(1)).resolveWorkflow(WORKFLOW_VERSION);
+        verifyNoMoreInteractions(this.datasource);
+
+    }    
+    
+    @Test
     public void test_execToEndNode_shouldCompleteProcess() throws WorkflowOperationException {
         this.process.addStep("WAIT_CLOSED", "WAIT_CLOSED", this.agentA, new Date());
         this.process.addStep("WAIT_CLOSED", "WAIT_CLOSED", this.agentB, new Date());

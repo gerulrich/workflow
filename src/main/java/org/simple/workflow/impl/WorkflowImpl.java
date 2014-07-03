@@ -67,7 +67,7 @@ public class WorkflowImpl
         if (transitionByNode != null) {
             return new ArrayList<Transition>(transitionByNode.values());
         }
-        return null;
+        return new ArrayList<Transition>();
     }
 
     @Override
